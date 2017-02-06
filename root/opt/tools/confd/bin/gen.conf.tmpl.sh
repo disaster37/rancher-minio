@@ -5,6 +5,7 @@ MINIO_DATA=${MINIO_DATA:-"${SERVIVE_HOME}/data"}
 
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/minio-server.cfg.toml
 [template]
+prefix = "/self/service"
 src = "minio-server.cfg.tmpl"
 dest = "${SERVICE_HOME}/conf/mino-server.cfg"
 owner = "${SERVICE_USER}"
