@@ -7,7 +7,7 @@ cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/minio-server.cfg.toml
 [template]
 prefix = "/self/service"
 src = "minio-server.cfg.tmpl"
-dest = "${SERVICE_HOME}/conf/mino-server.cfg"
+dest = "${SERVICE_HOME}/conf/minio-server.cfg"
 owner = "${SERVICE_USER}"
 mode = "0644"
 keys = [
