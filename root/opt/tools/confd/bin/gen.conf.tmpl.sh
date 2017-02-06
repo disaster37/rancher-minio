@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MINIO_DATA=${MINIO_DATA:-"${SERVIVE_HOME}/data"}
+MINIO_DATA=${MINIO_DATA:-"${SERVICE_HOME}/data"}
 
 
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/minio-server.cfg.toml
