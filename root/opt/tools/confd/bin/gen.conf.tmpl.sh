@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MINIO_DATA=${MINIO_DATA:-"${SERVICE_HOME}/data"}
+MINIO_DISKS=${MINIO_DISKS:-"${SERVICE_HOME}/data/disk0"}
 
 
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/minio-server.cfg.toml
@@ -18,7 +18,10 @@ reload_cmd = "${SERVICE_HOME}/bin/minio-service.sh restart"
 EOF
 
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/templates/minio-server.cfg.tmpl
-MINIO_DATA=${MINIO_DATA}
-MINIO_NUMBER_SERVERS= "{{range \$i, \$containerName := ls "/containers"}}{{\$i}}{{end}}"
+MINIO_DISKS=${MINIO_DISKS}
+{{ $length := len "/containers"}} {{if eq $length 1}}
+MINIO_VOLUMES=${MINIO_DISKS}
+{{ else }}
 MINIO_VOLUMES="{{range \$i, \$containerName := ls "/containers"}}http://{{getv (printf "/containers/%s/primary_ip" \$containerName)}}${MINIO_DATA}/export {{end}}"
+{{ end }}
 EOF
