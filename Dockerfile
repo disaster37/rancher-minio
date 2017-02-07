@@ -8,7 +8,7 @@ ENV SERVICE_NAME=minio \
     SERVICE_UID=10003 \
     SERVICE_GROUP=minio \
     SERVICE_GID=10003 \
-    SERVICE_ARCHIVE=/opt/minio-rancher-tools.tgz
+    SERVICE_ARCHIVE=/opt/rancher-tools.tgz
 
 # Add files
 ADD root /

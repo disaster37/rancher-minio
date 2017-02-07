@@ -26,19 +26,19 @@ function checkNetwork {
 
 function serviceTemplate {
     log "[ Checking ${CONF_NAME} template... ]"
-    bash ${CONF_HOME}/bin/gen.conf.tmpl.sh
+    bash ${CONF_HOME}/bin/gen-conf-scheduler-tmpl.sh
 }
 
 function serviceStart {
     checkNetwork
     serviceTemplate
     log "[ Starting ${CONF_NAME}... ]"
-    /usr/bin/nohup ${CONF_INTERVAL} &> ${CONF_HOME}/log/confd.log &
+    start-stop-daemon --background --name ${CONF_NAME} --start --quiet --stdout ${SERVICE_HOME}/logs/${CONF_NAME}.log --stderr ${SERVICE_HOME}/logs/${CONF_NAME}.log --pidfile ${SERVICE_HOME}/${CONF_NAME}.pid --exec ${CONF_INTERVAL}
 }
 
 function serviceStop {
     log "[ Stoping ${CONF_NAME}... ]"
-    /usr/bin/killall confd
+    start-stop-daemon --name ${CONF_NAME} --retry 5 --oknodo --stop --quiet --pidfile ${SERVICE_HOME}/${CONF_NAME}.pid --exec ${CONF_INTERVAL}  > /dev/null 2>&1
 }
 
 function serviceRestart {
@@ -48,7 +48,7 @@ function serviceRestart {
     /opt/monit/bin/monit reload
 }
 
-CONF_NAME=confd
+CONF_NAME=confd-scheduler
 CONF_HOME=${CONF_HOME:-"/opt/tools/confd"}
 CONF_LOG=${CONF_LOG:-"${CONF_HOME}/log/confd.log"}
 CONF_BIN=${CONF_BIN:-"${CONF_HOME}/bin/confd"}
