@@ -15,7 +15,6 @@ reload_cmd = "${SERVICE_HOME}/bin/service-confd-app.sh restart"
 EOF
 
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/templates/scheduler.cfg.tmpl
-{{range \$i, \$containerName := ls "/containers"}}
-SCHEDULER_INSTANCES_{{\$1}}={{getv (printf "/containers/%s/primary_ip" \$containerName)}}
-{{ end }}
+SCHEDULER_INSTANCES="{{range \$i, \$containerName := ls "/containers"}}{{getv (printf "/containers/%s/primary_ip" \$containerName)}},{{ end }}
+TEST="{{join (range \$i, \$containerName := ls "/containers" getv (printf "/containers/%s/primary_ip" \$containerName)) ","}}"
 EOF
