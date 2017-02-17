@@ -1,18 +1,12 @@
-FROM rawmind/rancher-tools:0.3.4-7
+alpine:3.5
 MAINTAINER Sebastien LANGOUREAUX (linuxworkgroup@hotmail.com)
 
 # Set environment
-ENV SERVICE_NAME=minio \
-    SERVICE_HOME=/opt/minio \
-    SERVICE_USER=minio \
-    SERVICE_UID=10003 \
-    SERVICE_GROUP=minio \
-    SERVICE_GID=10003 \
-    SERVICE_ARCHIVE=/opt/rancher-tools.tgz
+ENV SCHEDULER_VOLUME=/opt/scheduler \
+    SCHEDULER_ARCHIVE=/opt/scheduler.tgz
 
 # Add files
 ADD root /
-RUN cd ${SERVICE_VOLUME} && \
-    chmod 755 ${SERVICE_VOLUME}/confd/bin/*.sh && \
-    tar czvf ${SERVICE_ARCHIVE} * && \
+RUN cd ${SCHEDULER_VOLUME} && \
+    tar czvf ${SCHEDULER_ARCHIVE} * && \
     rm -rf ${SERVICE_VOLUME}/*
