@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv sh
 
-exec cat << EOF > ${CONFD_HOME}/etc/conf.d/minio-run.toml
+exec cat << EOF > ${SERVICE_SCHEDULER}/etc/conf.d/scheduler.cfg.toml
 [template]
 prefix = "/self/service"
 src = "scheduler.cfg.tmpl"
