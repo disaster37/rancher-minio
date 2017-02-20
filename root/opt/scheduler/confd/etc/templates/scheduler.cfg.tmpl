@@ -1,1 +1,1 @@
-SCHEDULER_INSTANCES="{{range $i, $container := ls "/containers"}}{{if (ne $i 0)}},{{end}}{{getv (printf "/containers/%s/primary_ip" $container)}}{{end}}"
+export SCHEDULER_INSTANCES="{{range $i, $container := ls "/containers"}}{{if (ne $i 0)}},{{end}}{{getv (printf "/containers/%s/primary_ip" $container)}}{{end}}"
