@@ -1,3 +1,3 @@
 #!/usr/bin/with-contenv sh
 
-exec source "${SERVICE_SCHEDULER}/conf/scheduler.cfg"
+exec source "${SCHEDULER_VOLUME}/conf/scheduler.cfg"

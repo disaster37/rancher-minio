@@ -9,4 +9,8 @@ ENV SCHEDULER_VOLUME=/opt/scheduler \
 ADD root /
 RUN cd ${SCHEDULER_VOLUME} && \
     tar czvf ${SCHEDULER_ARCHIVE} * && \
-    rm -rf ${SERVICE_VOLUME}/*
+    rm -rf ${SCHEDULER_VOLUME}/*
+
+
+VOLUME ["${SCHEDULER_VOLUME}"]
+CMD ["cp", "${SCHEDULER_ARCHIVE}", "${SCHEDULER_VOLUME}/"]
