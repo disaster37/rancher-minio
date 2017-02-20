@@ -2,7 +2,7 @@
 
 exec cat << EOF > ${SCHEDULER_VOLUME}/confd/etc/conf.d/scheduler.cfg.toml
 [template]
-prefix = "/self/service"
+prefix = "/2015-12-19/self/service"
 src = "scheduler.cfg.tmpl"
 dest = "${SCHEDULER_VOLUME}/conf/scheduler.cfg"
 mode = "0644"
