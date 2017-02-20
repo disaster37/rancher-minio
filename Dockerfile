@@ -13,4 +13,4 @@ RUN cd ${SCHEDULER_VOLUME} && \
 
 
 VOLUME ["${SCHEDULER_VOLUME}"]
-CMD "gunzip -c ${SCHEDULER_ARCHIVE} | tar -xf - -C ${SCHEDULER_VOLUME}/"
+ENTRYPOINT "/docker-entrypoint.sh"
