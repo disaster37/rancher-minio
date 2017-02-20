@@ -8,6 +8,7 @@ ENV SCHEDULER_VOLUME=/opt/scheduler \
 # Add files
 ADD root /
 RUN cd ${SCHEDULER_VOLUME} && \
+    mkdir -p ${SCHEDULER_VOLUME}/conf ${SCHEDULER_VOLUME}/confd/etc/conf.d && \
     tar czvf ${SCHEDULER_ARCHIVE} * && \
     rm -rf ${SCHEDULER_VOLUME}/* && \
     chmod +x /docker-entrypoint.sh
