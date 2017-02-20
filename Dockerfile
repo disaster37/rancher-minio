@@ -9,7 +9,8 @@ ENV SCHEDULER_VOLUME=/opt/scheduler \
 ADD root /
 RUN cd ${SCHEDULER_VOLUME} && \
     tar czvf ${SCHEDULER_ARCHIVE} * && \
-    rm -rf ${SCHEDULER_VOLUME}/*
+    rm -rf ${SCHEDULER_VOLUME}/* && \
+    chmod +x /docker-entrypoint.sh
 
 
 VOLUME ["${SCHEDULER_VOLUME}"]
